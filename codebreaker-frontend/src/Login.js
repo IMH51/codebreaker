@@ -30,24 +30,24 @@ class Login extends Component {
   }
 
   handleLogin = () => {
-    if (this.state.guesses === "10") {
+    if (this.state.guesses === 10) {
       this.difficulty = "Hard"
-    } else if (this.state.guesses === "15") {
+    } else if (this.state.guesses === 15) {
       this.difficulty = "Intermediate"
-    } else if (this.state.guesses == "20") {
+    } else if (this.state.guesses === 20) {
       this.difficulty = "Easy"
     }
-    this.props.login(this.state.username, Number(this.state.guesses), this.difficulty)
+    this.props.login(this.state.username, this.state.guesses, this.difficulty)
     this.props.history.push("/game")
   }
 
   render = () => {
     return (
-      <div class="login-container">
+      <div className="login-container">
       <h1>Welcome To Codebreaker</h1>
       <p>Please enter your name and choose a difficulty level to begin:</p>
       <input onChange={this.handleChange} type="text" placeholder='Username' name="username" value={this.props.username} />
-      <select name="difficulty" className="difficulty-select" name="guesses" onChange={this.handleChange}>
+      <select name="difficulty" className="difficulty-select" >
         {this.options.map(level => <option key={level.level} name={level.level} value={level.guesses}>{`${level.level} - ${level.guesses} Guesses`}</option>)}
       </select>
       <button name="login" onClick={this.handleLogin} value="submit">Start Game</button>
