@@ -47,7 +47,7 @@ class Login extends Component {
       <h1>Welcome To Codebreaker</h1>
       <p>Please enter your name and choose a difficulty level to begin:</p>
       <input onChange={this.handleChange} type="text" placeholder='Username' name="username" value={this.props.username} />
-      <select name="difficulty" className="difficulty-select" >
+      <select name="difficulty" onChange={this.handleChange} className="difficulty-select" >
         {this.options.map(level => <option key={level.level} name={level.level} value={level.guesses}>{`${level.level} - ${level.guesses} Guesses`}</option>)}
       </select>
       <button name="login" onClick={this.handleLogin} value="submit">Start Game</button>

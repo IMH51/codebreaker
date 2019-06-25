@@ -25,6 +25,11 @@ class Game extends Component {
     this.setState({...this.state, code: event.target.value})
   }
 
+
+  setSeconds = (time) => {
+    return time
+  }
+
   render = () => {
     return (
       <div className="game-container">
@@ -34,7 +39,6 @@ class Game extends Component {
         <p>Please enter a 4 digit code below:</p>
         <input name="guess" placeholder="Enter Code Here..." value={this.state.code} onChange={this.handleChange} />
         <button name="submit" onClick={() => this.props.checkCode(this.state.code)} value="submit">Submit</button>
-        <TimerContainer guesses={this.props.guesses} />
         <CluesContainer clues={this.props.clues} />
       </div>
     )

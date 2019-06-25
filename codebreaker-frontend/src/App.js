@@ -4,7 +4,7 @@ import './App.css';
 import Login from './Login.js'
 import Game from './Game.js'
 import Scores from './Scores.js'
-// import TimerContainer from "./TimerContainer.js"
+import TimerContainer from "./TimerContainer.js"
 
 const initialState = {
   username: null,
@@ -16,8 +16,6 @@ const initialState = {
 }
 
 class App extends Component {
-
-
 
   constructor() {
     super()
@@ -72,7 +70,15 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path="/" component={props => <Login {...props} login={this.login}/>} />
-          <Route path="/game" component={props => <Game {...props} username={this.state.username} guesses={this.state.guesses} level={this.state.level} clues={this.state.clues} checkCode={this.checkCode}/> }/>
+          <Route path="/game" component={props => {
+              return(
+                <div>
+                <Game {...props} username={this.state.username} guesses={this.state.guesses} level={this.state.level} clues={this.state.clues} checkCode={this.checkCode}/>
+                <TimerContainer {...props} level={this.state.level} />
+                </div>
+                )
+              }
+            }/>
           <Route path="/scores" component={props => <Scores {...props} />} />
         </div>
       </Router>

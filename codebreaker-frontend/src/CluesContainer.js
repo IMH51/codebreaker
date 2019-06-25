@@ -3,11 +3,6 @@ import Clue from "./Clue.js"
 
 class CluesContainer extends Component {
 
-  componentDidMount() {
-    let container = document.querySelector(".clues-container")
-    container.style.scrollTop = container.style.scrollHeight
-  }
-
   render = () => {
     return(
       <div className="clues-container">
