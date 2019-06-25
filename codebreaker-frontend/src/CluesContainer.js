@@ -6,7 +6,13 @@ class CluesContainer extends Component {
   render = () => {
     return(
       <div className="clues-container">
-        {this.props.clues.map((clue, index) => <Clue key={index} clue={clue} index={index} />)}
+        {this.props.index > 0 ? <Clue clue={this.props.clue} index={this.props.index} /> : null }
+        {this.props.index > 1 ?
+          <div className="buttons">
+          <button className="prev-button" onClick={this.decreaseIndex}>Previous Clue</button>
+          <button className="next-button" onClick={this.increaseIndex}>Next Clue</button>
+          </div>
+          :  null }
       </div>
     )
   }

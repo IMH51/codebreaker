@@ -19,8 +19,10 @@ code {
 
 .game-div {
   float: left;
+  width: 50%
 }
 
 .timer-div {
   float: right;
+  width: 50%
 }

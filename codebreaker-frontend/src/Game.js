@@ -12,7 +12,8 @@ class Game extends Component {
       code: this.props.code,
       level: this.props.guesses,
       guesses: this.props.guesses,
-      clues: []
+      clues: [],
+      index: 0
     }
 
     if (this.state.level === "10") {
@@ -42,7 +43,7 @@ class Game extends Component {
         newClue.correctNumber ++
       }
     })
-    this.setState({...this.state, guesses: this.state.guesses - 1, clues: [...this.state.clues, newClue]})
+    this.setState({...this.state, guess: "", guesses: this.state.guesses - 1, clues: [...this.state.clues, newClue], index: this.state.clues.length + 1})
   }
 
   checkCode = () => {
@@ -54,6 +55,18 @@ class Game extends Component {
       } else {
         this.updateGuesses()
       }
+    }
+  }
+
+  decreaseIndex = () => {
+    if (this.state.index > 0) {
+    this.setState({...this.state, index: this.state.index - 1})
+    }
+  }
+
+  increaseIndex = () => {
+    if (this.state.index < this.state.clues.length) {
+    this.setState({...this.state, index: this.state.index + 1})
     }
   }
 
@@ -80,7 +93,7 @@ class Game extends Component {
         <p>Please enter a 4 digit code below:</p>
         <input name="guess" placeholder="Enter Code Here..." value={this.state.guess} onChange={this.handleChange} />
         <button name="submit" onClick={this.checkCode} value="submit">Submit</button>
-        <CluesContainer clues={this.state.clues} />
+        <CluesContainer clue={this.state.clues[this.state.index]} index={this.state.index} decreaseIndex={this.decreaseIndex} increaseIndex={this.increaseIndex}/>
       </div>
     )
   }
