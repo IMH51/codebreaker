@@ -16,3 +16,11 @@ code {
   max-height: 400px;
   overflow: scroll;
 }
+
+.game-div {
+  float: left;
+}
+
+.timer-div {
+  float: right;
+}

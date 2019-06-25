@@ -8,11 +8,8 @@ import TimerContainer from "./TimerContainer.js"
 
 const initialState = {
   username: null,
-  score: 0,
-  code: null,
-  level: null,
-  guesses: 0,
-  clues: []
+  guesses: null
+
 }
 
 class App extends Component {
@@ -22,47 +19,13 @@ class App extends Component {
 
     this.state = initialState
 
+    this.code = [Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10)]
   }
 
-  calculateScore = () => {
-    console.log("Correct!")
-  }
 
-  updateGuesses = code => {
-    let guessArray = code.split("")
-    let secondGuessArray = code.split("")
-    let codeArray = [...this.state.code]
-    let newClue = {guess: code, correctNumber: 0, correctPosition: 0}
-    guessArray.forEach((number, index) => {
-      if (codeArray[index] === Number(number)){
-        newClue.correctPosition ++
-        secondGuessArray.splice(index, 1)
-        codeArray[index] = "X"
-      }
-    })
-    secondGuessArray.forEach(number => {
-      if (codeArray.includes(Number(number))){
-        newClue.correctNumber ++
-      }
-    })
-    this.setState({...this.state, guesses: this.state.guesses - 1, clues: [...this.state.clues, newClue], seconds: this.seconds})
-  }
 
-  checkCode = (code) => {
-    if (!Number(code) || code.length !== 4){
-      alert("Invalid Code! Please enter a 4 digit number.")
-    } else {
-      if (this.state.code.join('') === code) {
-        this.calculateScore()
-      } else {
-        this.updateGuesses(code)
-      }
-    }
-  }
-
-  login = (username, guesses, level) => {
-    let code = [Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10)]
-    this.setState({...this.state, username: username, guesses: guesses, level: level, code: code})
+  login = (username, guesses) => {
+    this.setState({ username: username, guesses: guesses})
   }
 
   render = () => {
@@ -72,9 +35,9 @@ class App extends Component {
           <Route exact path="/" component={props => <Login {...props} login={this.login}/>} />
           <Route path="/game" component={props => {
               return(
-                <div>
-                <Game {...props} username={this.state.username} guesses={this.state.guesses} level={this.state.level} clues={this.state.clues} checkCode={this.checkCode}/>
-                <TimerContainer {...props} level={this.state.level} />
+                <div className="game-container">
+                  <Game {...props} className="game-div" code={this.code} guesses={this.state.guesses} username={this.state.username} />
+                  <TimerContainer {...props} className="timer-div" guesses={this.state.guesses} />
                 </div>
                 )
               }
