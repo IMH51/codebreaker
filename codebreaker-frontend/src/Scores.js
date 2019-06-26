@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 
 class Scores extends Component {
 
-  constructor() {
-    super()
-
-    this.scoresURL = "route"
-
-    this.state = null
-
-  }
-
-  highScores = () => {
-    return fetch(this.scoresURL)
-    .then(resp => resp.json())
-    .then(data => {
-      data.sort(user => user.score).slice(0, 4)
-    })
+  playAgain = () => {
+    this.props.resetApp()
+    this.props.history.push("/")
   }
 
   render = () => {
-    return (<h1>Scores Component Rendered</h1>)
+    return(
+      <div>
+      <h2>Congratulations {this.props.current.user}, you cracked the code!</h2>
+      {this.props.selection.includes(this.props.current) ?
+        <p> You scored {this.props.current.score}, which gets you on to the Leaderboard!</p> :
+        <p> You scored {this.props.current.score} </p>
+      }
+      <h3>High Scores:</h3>
+      <ol>
+      {this.props.selection.map((highScore, index) => <li key={index}>{highScore.user} : {highScore.score}</li>)}
+      </ol>
+      <button onClick={this.playAgain}>Play Again</button>
+    </div>
+    )
   }
-
 }
 
 export default Scores

@@ -27,7 +27,8 @@ class Login extends Component {
     this.setState({...this.state, [event.target.name]: event.target.value })
   }
 
-  handleLogin = () => {
+  handleLogin = (event) => {
+    event.preventDefault()
     this.props.login(this.state.username, this.state.guesses)
     this.props.history.push("/game")
   }
@@ -36,11 +37,13 @@ class Login extends Component {
     return (
       <div className="login-container">
       <p>Please enter your name and choose a difficulty level to begin:</p>
-      <input onChange={this.handleChange} type="text" placeholder='Username' name="username" value={this.props.username} />
-      <select name="guesses" onChange={this.handleChange} className="difficulty-select" >
-        {this.options.map(level => <option key={level.level} name={level.level} value={level.guesses}>{`${level.level} - ${level.guesses} Guesses`}</option>)}
-      </select>
-      <button name="login" onClick={this.handleLogin} value="submit">Start Game</button>
+      <form className='login-form' onSubmit={this.handleLogin}>
+        <input onChange={this.handleChange} type="text" placeholder='Username' name="username" value={this.props.username} />
+        <select name="guesses" onChange={this.handleChange} className="difficulty-select" >
+          {this.options.map(level => <option key={level.level} name={level.level} value={level.guesses}>{`${level.level} - ${level.guesses} Guesses`}</option>)}
+        </select>
+        <button name="login"  value="submit">Start Game</button>
+      </form>
       </div>
     )
   }

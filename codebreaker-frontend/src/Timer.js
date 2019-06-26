@@ -23,13 +23,14 @@ class Timer extends Component {
     }
 
     componentWillUnmount() {
+
       clearInterval(this.interval);
     }
 
     render() {
       return (
-        <div>
-          Time Remaining: {this.state.seconds}
+        <div className="hidden-div">
+          {this.state.seconds}
         </div>
         );
       }

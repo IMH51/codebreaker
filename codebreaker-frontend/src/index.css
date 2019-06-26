@@ -18,12 +18,20 @@ code {
   overflow: scroll;
 }
 
-.game-div {
+.game-container {
   float: left;
-  width: 48%
+  align-items: center;
 }
 
 .timer-div {
   float: right;
-  width: 48%
+  /* align-items: flex-start; */
+}
+
+.h1-header {
+  align-content: center;
+}
+
+.hidden-div {
+  color: white;
 }

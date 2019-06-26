@@ -46,18 +46,35 @@ class Game extends Component {
     this.setState({...this.state, guess: "", guesses: this.state.guesses - 1, clues: [...this.state.clues, newClue], index: this.state.clues.length})
   }
 
-  checkCode = () => {
+  checkCode = (event) => {
+    event.preventDefault()
     if (!Number(this.state.guess) || this.state.guess.length !== 4){
       alert("Invalid Code! Please enter a 4 digit number.")
     } else {
       if (this.state.guess === this.state.code.join('')) {
-        this.props.calculateScore()
+        this.calculateScore()
       } else {
         this.updateGuesses()
       }
     }
   }
 
+  calculateScore = () => {
+    let seconds = Number(document.querySelector(".hidden-div").innerText)
+    let score = ((this.state.guesses - 1) * this.state.level) * seconds
+    let userObj = { user: this.state.username, score: score }
+    this.sendScore(userObj).then(this.props.highScores).then(() => this.props.history.push("/scores"))
+  }
+
+  sendScore = (userObj) => {
+    return fetch("http://localhost:3000/scores", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userObj)
+    })
+  }
 
   handleChange = event => {
     this.setState({...this.state, guess: event.target.value})
@@ -69,14 +86,22 @@ class Game extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.guesses === 0) {
+      this.props.history.push("/lose")
+    }
+  }
+
   render = () => {
     return (
       <div className="game-container">
         <h3>Level - {this.level}</h3>
         <p>{this.state.username}, you have {this.state.guesses} guesses remaining.</p>
         <p>Please enter a 4 digit code below:</p>
+        <form className="guess-form" onSubmit={this.checkCode}>
         <input name="guess" placeholder="Enter Code Here..." value={this.state.guess} onChange={this.handleChange} />
-        <button name="submit" onClick={this.checkCode} value="submit">Submit</button>
+        <button name="submit" value="submit">Enter</button>
+        </form>
         <CluesContainer clues={this.state.clues}/>
       </div>
     )
