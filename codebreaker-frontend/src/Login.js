@@ -21,8 +21,6 @@ class Login extends Component {
       guesses: 10}
     ]
 
-    this.difficulty = ""
-
   }
 
   handleChange = event => {
@@ -37,7 +35,6 @@ class Login extends Component {
   render = () => {
     return (
       <div className="login-container">
-      <h1>Welcome To Codebreaker</h1>
       <p>Please enter your name and choose a difficulty level to begin:</p>
       <input onChange={this.handleChange} type="text" placeholder='Username' name="username" value={this.props.username} />
       <select name="guesses" onChange={this.handleChange} className="difficulty-select" >

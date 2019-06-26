@@ -8,10 +8,15 @@ class Timer extends Component {
       }
 
     countDown() {
+      if (this.state.seconds !== 1) {
       this.setState(prevState => ({
         seconds: prevState.seconds - 1
           }));
+      } else {
+          clearInterval(this.interval)
+          this.props.calculateScore()
         }
+      }
 
     componentDidMount() {
       this.interval = setInterval(() => this.countDown(), 1000);
@@ -24,32 +29,11 @@ class Timer extends Component {
     render() {
       return (
         <div>
-          {this.state.seconds}
+          Time Remaining: {this.state.seconds}
         </div>
         );
       }
 
-  // componentDidMount() {
-  //   setInterval(() => {
-  //     let timer = document.querySelector("#timer-seconds")
-  //     let number = Number(timer.innerText)
-  //     timer.innerText = number - 1
-  //   }, 1000)
-  // }
-  //
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (nextProps.time !== this.props.time){
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
-  //
-  // render = () => {
-  //   return(
-  //     <p id="timer-seconds">{this.props.time}</p>
-  //   )
-  // }
 }
 
 export default Timer

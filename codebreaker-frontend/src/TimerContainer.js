@@ -7,7 +7,7 @@ class TimerContainer extends Component {
 
     return (
       <div className="timer-div">
-        <Timer time={this.props.guesses * 30} />
+        <Timer time={10} calculateScore={this.props.calculateScore}/>
       </div>
     )
   }

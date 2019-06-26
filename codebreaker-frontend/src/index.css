@@ -13,16 +13,17 @@ code {
 }
 
 .clues-container {
-  max-height: 400px;
+  max-height: 300px;
+  width: 50%;
   overflow: scroll;
 }
 
 .game-div {
   float: left;
-  width: 50%
+  width: 48%
 }
 
 .timer-div {
   float: right;
-  width: 50%
+  width: 48%
 }

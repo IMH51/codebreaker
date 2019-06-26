@@ -43,7 +43,7 @@ class Game extends Component {
         newClue.correctNumber ++
       }
     })
-    this.setState({...this.state, guess: "", guesses: this.state.guesses - 1, clues: [...this.state.clues, newClue], index: this.state.clues.length + 1})
+    this.setState({...this.state, guess: "", guesses: this.state.guesses - 1, clues: [...this.state.clues, newClue], index: this.state.clues.length})
   }
 
   checkCode = () => {
@@ -51,27 +51,16 @@ class Game extends Component {
       alert("Invalid Code! Please enter a 4 digit number.")
     } else {
       if (this.state.guess === this.state.code.join('')) {
-        this.calculateScore()
+        this.props.calculateScore()
       } else {
         this.updateGuesses()
       }
     }
   }
 
-  decreaseIndex = () => {
-    if (this.state.index > 0) {
-    this.setState({...this.state, index: this.state.index - 1})
-    }
-  }
 
-  increaseIndex = () => {
-    if (this.state.index < this.state.clues.length) {
-    this.setState({...this.state, index: this.state.index + 1})
-    }
-  }
-
-  calculateScore = () => {
-    console.log("Correct!")
+  handleChange = event => {
+    this.setState({...this.state, guess: event.target.value})
   }
 
   componentDidMount() {
@@ -80,20 +69,15 @@ class Game extends Component {
     }
   }
 
-  handleChange = event => {
-    this.setState({...this.state, guess: event.target.value})
-  }
-
   render = () => {
     return (
       <div className="game-container">
-        <h1>CodeBreaker</h1>
         <h3>Level - {this.level}</h3>
         <p>{this.state.username}, you have {this.state.guesses} guesses remaining.</p>
         <p>Please enter a 4 digit code below:</p>
         <input name="guess" placeholder="Enter Code Here..." value={this.state.guess} onChange={this.handleChange} />
         <button name="submit" onClick={this.checkCode} value="submit">Submit</button>
-        <CluesContainer clue={this.state.clues[this.state.index]} index={this.state.index} decreaseIndex={this.decreaseIndex} increaseIndex={this.increaseIndex}/>
+        <CluesContainer clues={this.state.clues}/>
       </div>
     )
   }
