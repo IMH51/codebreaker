@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0 ;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -12,26 +12,58 @@ code {
     monospace;
 }
 
+.master-container {
+  align-content: center;
+}
+
 .clues-container {
-  max-height: 300px;
-  width: 50%;
+  text-align: center;
+  max-height: 350px;
   overflow: scroll;
 }
 
 .game-container {
+  text-align: center;
+  margin: 50px;
+}
+
+.guess-container{
   float: left;
-  align-items: center;
+  width: 48%
 }
 
 .timer-div {
+  text-align: center;
   float: right;
-  /* align-items: flex-start; */
+  width: 48%
 }
 
-.h1-header {
-  align-content: center;
+.timer-div canvas {
+  text-align: left;
+}
+
+.h1-header, .login-container, .scores-container, .timer-header, .timer-h2, .lose-container, .highscore-container {
+  text-align: center;
 }
 
 .hidden-div {
   color: white;
+}
+
+.countdown-timer {
+  align-content: left;
+  text-align: center;
+  margin-left: 20px;
+}
+
+.scores-list {
+  width: 200px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.scores-div {
+  align-items: center;
+  text-align: center;
 }

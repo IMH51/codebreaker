@@ -9,7 +9,7 @@ class Lose extends Component {
 
   render = () => {
     return(
-    <div>
+    <div className="lose-container">
       <p>Sorry, you failed to crack the code! Better luck next time!</p>
       <button onClick={this.resetGame}>Play Again</button>
     </div>

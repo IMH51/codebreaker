@@ -1,3 +1,29 @@
 {
-  "scores": []
+  "scores": [
+    {
+      "user": "Ian",
+      "score": 100080,
+      "id": 1
+    },
+    {
+      "user": "dave",
+      "score": 221540,
+      "id": 2
+    },
+    {
+      "user": "steve",
+      "score": 222300,
+      "id": 3
+    },
+    {
+      "user": "ian",
+      "score": 151760,
+      "id": 4
+    },
+    {
+      "user": "ian",
+      "score": 10260,
+      "id": 5
+    }
+  ]
 }

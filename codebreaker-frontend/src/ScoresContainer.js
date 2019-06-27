@@ -5,7 +5,7 @@ class ScoresContainer extends Component {
 
   render = () => {
     return (
-    <div>
+    <div className="scores-container">
       <Scores selection={this.props.selection} current={this.props.current} resetApp={this.props.resetApp}/>
     </div>
     )

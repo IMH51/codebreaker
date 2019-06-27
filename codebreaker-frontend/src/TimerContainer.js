@@ -12,8 +12,8 @@ class TimerContainer extends Component {
 
     return (
       <div className="timer-div">
-        <h2>Time Remaining:</h2>
-        <ReactCountdownClock seconds={this.props.guesses * 30} onComplete={this.timeOut}/>
+        <h2 className="timer-h2">Time Remaining:</h2>
+        <ReactCountdownClock className="countdown-timer" seconds={this.props.guesses * 30} onComplete={this.timeOut}/>
         <Timer time={this.props.guesses * 30} setSeconds={this.props.setSeconds}/>
       </div>
     )

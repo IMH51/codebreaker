@@ -34,13 +34,14 @@ class Game extends Component {
     guessArray.forEach((number, index) => {
       if (codeArray[index] === Number(number)){
         newClue.correctPosition ++
-        secondGuessArray.splice(index, 1)
+        secondGuessArray[index] = "O"
         codeArray[index] = "X"
       }
     })
     secondGuessArray.forEach(number => {
       if (codeArray.includes(Number(number))){
         newClue.correctNumber ++
+        codeArray[codeArray.indexOf(Number(number))] = "X"
       }
     })
     this.setState({...this.state, guess: "", guesses: this.state.guesses - 1, clues: [...this.state.clues, newClue], index: this.state.clues.length})
@@ -95,6 +96,7 @@ class Game extends Component {
   render = () => {
     return (
       <div className="game-container">
+        <div className="guess-container">
         <h3>Level - {this.level}</h3>
         <p>{this.state.username}, you have {this.state.guesses} guesses remaining.</p>
         <p>Please enter a 4 digit code below:</p>
@@ -103,6 +105,7 @@ class Game extends Component {
         <button name="submit" value="submit">Enter</button>
         </form>
         <CluesContainer clues={this.state.clues}/>
+        </div>
       </div>
     )
   }
